@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Map</title>
+    <!-- CSS Reset by using normalize.css-->
+    <link rel="stylesheet" type="text/css" href="CSS/normalize.css">
+    <link rel="stylesheet" type="text/css" href="CSS/screen.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li class="nav"><a href="index.html">Main page</a></li>
+          <li class="nav"><a href="resume.html">Professional resume</a></li>
+          <li class="nav"><a href="self_introduce.html">Self introduction</a></li>
+          <li class="nav"><a href="#" class="visited">Map</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="content">
+      <h2>Seoul</h2>
+      <div id="map"></div>
+      <script>   
+        var marker;
+        function initMap() {
+          var seoul = {lat: 37.576039, lng: 126.976912};
+        
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: seoul
+          });
+            
+          marker = new google.maps.Marker({
+            position: seoul,
+            animation: google.maps.Animation.DROP,
+            map: map,
+            title: 'Seoul - Gwanghwamun'
+          });
+          /* Listener for toggle Bounce */
+          marker.addListener('click', toggleBounce);
+            
+          /* InfoWindow */
+          var contentString = '<div id="map_seoul_content">' +
+              '<h1>Seoul</h1>' +
+              '<p><b>Gwanghwamun</b> is the main and largest gate of Gyeongbokgung Palace, in Jongno-gu, Seoul, South Korea. ' +
+              'It is located at a three-way intersection at the northern end of Sejongno. As a landmark and symbol of Seoul\'s ' +
+              'long history as the capital city during the Joseon Dynasty, the gate has gone through multiple periods of destruction and disrepair. ' +
+              'Restoration work on the gate was finished and it was opened to the public on August 15, 2010. ' +
+              '</p></div>';
+          var infoWindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          
+          /* Listener for infomation Window */
+          marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+            setTimeout("goToWebsite()", 1000 * 2);
+          });
+            
+          } /* end of initMap() */
+      
+          function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+              marker.setAnimation(null);    
+            } else {
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+          }
+          
+          function goToWebsite() {
+            var dialog = confirm("Do you want to open the web page of Gwanghwamun?");
+            if(dialog === true) {
+              window.open("http://www.royalpalace.go.kr/html/eng/main/main.jsp");
+            } else {
+            }
+          }
+        </script>
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkuEGf2LgTdUEraghahmZVtJmFV4nhbho&callback=initMap">
+        </script>
+        <p>(Click the marker and see the information about my favorite place in Seoul!)</p>
+    </section>
+    <footer>
+      <p>Created by Dayeon Lee</p>
+      <p>Contact : dlee58@hawk.iit.edu</p>
+    </footer>
+  </body>
+</html>

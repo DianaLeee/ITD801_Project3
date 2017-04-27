@@ -22,6 +22,8 @@ footer {
   background-color: #9b59b6;
   display:block;
   color: white;
+  position: absolute;
+  width: 100%;
 }
 
 /* css design for header navigation bar */
@@ -116,4 +118,9 @@ h3 {
 /* self_introduce.html */
 section#myself {
   color: #4d4d4d;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
 }
